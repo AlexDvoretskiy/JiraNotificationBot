@@ -15,8 +15,8 @@ public class TelegramBot extends AbilityBot {
 	private Long chatId;
 	private boolean isNotAuthorized = true;
 
-	public TelegramBot(DefaultBotOptions botOptions) {
-		super(BotConfiguration.getBotToken(), BotConfiguration.getBotUsername(), botOptions);
+	public TelegramBot(BotConfiguration botConfiguration, DefaultBotOptions botOptions) {
+		super(botConfiguration.getBotToken(), botConfiguration.getBotUsername(), botOptions);
 	}
 
 	@Override

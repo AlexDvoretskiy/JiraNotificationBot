@@ -12,6 +12,7 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class NotificationService {
@@ -46,7 +47,7 @@ public class NotificationService {
 			checkPersonalIssueListAndSendNotification(personalIssueList);
 			try {
 				log.debug(String.format("Поток [%s] уснул", Thread.currentThread().getName()));
-				Thread.sleep(60000);
+				Thread.sleep(TimeUnit.SECONDS.toMillis(60));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				break;
