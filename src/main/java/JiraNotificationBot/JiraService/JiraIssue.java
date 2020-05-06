@@ -1,10 +1,12 @@
 package JiraNotificationBot.JiraService;
 
 import com.atlassian.jira.rest.client.api.domain.Issue;
+import lombok.Getter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+@Getter
 public class JiraIssue {
     private String label;
     private String hyperlink;
@@ -18,14 +20,14 @@ public class JiraIssue {
     private String issueType;
     private Long issueTypeID;
 
-    private final String mainLink = "https://job-jira.otr.ru/browse/";
+    private static final String MAIN_LINK = "https://job-jira.otr.ru/browse/";
 
     public JiraIssue(Issue issue){
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
         String formatDate = dateFormat.format(issue.getCreationDate().toDate());
 
         label = issue.getKey();
-        hyperlink = mainLink + label;
+        hyperlink = MAIN_LINK + label;
         createInfo = issue.getReporter().getDisplayName() + "\n" + formatDate;
         noteSummary = issue.getSummary();
         assigneeInfo = issue.getAssignee().getDisplayName();
@@ -50,53 +52,5 @@ public class JiraIssue {
         JiraIssue jiraIssue = (JiraIssue) obj;
 
         return jiraIssue.getLabel().equals(this.label);
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public String getHyperlink() {
-        return hyperlink;
-    }
-
-    public String getCreateInfo() {
-        return createInfo;
-    }
-
-    public String getNoteSummary() {
-        return noteSummary;
-    }
-
-    public String getAssigneeInfo() {
-        return assigneeInfo;
-    }
-
-    public Long getPriorityID() {
-        return priorityID;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public String getMainLink() {
-        return mainLink;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Long getStatusID() {
-        return statusID;
-    }
-
-    public String getIssueType() {
-        return issueType;
-    }
-
-    public Long getIssueTypeID() {
-        return issueTypeID;
     }
 }

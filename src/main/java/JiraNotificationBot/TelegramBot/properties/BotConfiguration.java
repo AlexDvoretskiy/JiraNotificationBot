@@ -1,11 +1,15 @@
 package JiraNotificationBot.TelegramBot.properties;
 
-
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BotConfiguration {
+
 	public static final String PROXY_KEY = "proxy";
 	public static final String BOT_KEY = "telegramBot";
 	public static final String JIRA_KEY = "jira";
@@ -22,34 +26,27 @@ public class BotConfiguration {
 	public static final String JIRA_PASSWORD_KEY = "password";
 	public static final String JIRA_URL_KEY = "url";
 
+	private String proxyHost;
+	private int proxyPort;
+	private String proxyUser;
+	private String proxyPassword;
+	private String botUsername;
+	private String botToken;
+	private String jiraUsername;
+	private String jiraPassword;
+	private String jiraUrl;
 
-	@Getter
-	@Setter
-	private static String proxyHost;
-	@Getter
-	@Setter
-	private static int proxyPort;
-	@Getter
-	@Setter
-	private static String proxyUser;
-	@Getter
-	@Setter
-	private static String proxyPassword;
+	private static volatile BotConfiguration instance;
 
-	@Getter
-	@Setter
-	private static String botUsername;
-	@Getter
-	@Setter
-	private static String botToken;
+	public static BotConfiguration getInstance() {
+		if (instance == null) {
+			synchronized (BotConfiguration.class) {
+				if (instance == null) {
+					instance = new BotConfiguration();
+				}
+			}
+		}
+		return instance;
+	}
 
-	@Getter
-	@Setter
-	private static String jiraUsername;
-	@Getter
-	@Setter
-	private static String jiraPassword;
-	@Getter
-	@Setter
-	private static String jiraUrl;
 }
